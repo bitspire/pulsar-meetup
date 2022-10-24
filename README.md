@@ -1,6 +1,6 @@
 # Pulsar Demos for Tech at Scale Meetup
 
-15th January, 2020 at 500px, Toronto, ON, Canada
+[24th October, 2022 meetup](https://www.meetup.com/tech-at-scale-toronto-meetup/events/288527055/)
 
 The repo has the following demos:
 
