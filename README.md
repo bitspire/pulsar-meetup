@@ -8,4 +8,6 @@ The repo has the following demos:
 
 2- **Function** simple pulsar function to manipulate stream data
 
-3- **Connectors** configuring a JDBC sink (MySQL) and how to use Generic avro schema
+3- **Sql** explore stored data in the topic using Pulsar SQL directly without a DB
+
+4- **Schema** Publish data using JSONSchema and demo DelayedDelivery
