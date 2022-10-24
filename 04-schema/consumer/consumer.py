@@ -7,7 +7,9 @@ import signal
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 client = pulsar.Client('pulsar://localhost:6650')
-consumer = client.subscribe('persistent://public/default/schema-topic', 'schema-consumer-subscription')
+
+# Subscription type is Shared (i.e. Queue semantic) to work with DelayedDelivery
+consumer = client.subscribe('persistent://public/default/schema-topic', 'schema-consumer-subscription', consumer_type=pulsar.ConsumerType.Shared)
 
 while True:
     msg = consumer.receive()
