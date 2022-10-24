@@ -4,5 +4,5 @@ Build a fat jar
 
 ```shell
 ./gradlew jar
-cp build/libs/processor.jar /opt/apache-pulsar-2.4.2/examples/
+cp app/build/libs/app.jar <PULSAR_HOME>/apache-pulsar-2.10.2/examples/
 ```

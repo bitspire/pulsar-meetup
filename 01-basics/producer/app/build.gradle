@@ -7,6 +7,7 @@
  */
 
 plugins {
+    id 'java'
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
 }
@@ -30,4 +31,19 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClass = 'ca.bitspire.meetup.pulsar.App'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'ca.bitspire.meetup.pulsar.App'
+        )
+    }
+    doFirst {
+        from {
+            configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

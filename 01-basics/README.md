@@ -22,8 +22,13 @@ cd apache-pulsar-$PULSAR_VERSION
 Run
 
 ```shell
-bin/pulsar standalone
+pulsar standalone
 ```
+
+Note to run on a different port update port 6650 and 8080 in `conf/standalone.conf` and run with
+
+`pulsar standalone --zookeeper-port 2182 --bookkeeper-port 3182 --stream-storage-port 4182`
+
 
 ### Docker
 
@@ -33,34 +38,34 @@ docker run -it \
   -p 6650:6650 \
   -p 8080:8080 \
   -v $PWD/data:/pulsar/data \
-  apachepulsar/pulsar:2.4.2 \
+  apachepulsar/pulsar:2.10.2 \
   bin/pulsar standalone
 ```
 
-`alias pulsar-admin='docker exec -it pulsar bin/pulsar-admin'`
+`alias pulsar-admin='docker exec -it pulsar pulsar-admin'`
 
 ## Hello World
 
 ### Consumer
 
 ```shell
-bin/pulsar-client consume persistent://public/default/hello-topic --subscription-name meetup --num-messages 0
+pulsar-client consume persistent://public/default/hello-topic --subscription-name meetup --num-messages 0
 ```
 
 ### Producer
 
 ```shell
-bin/pulsar-client produce persistent://public/default/hello-topic --messages "Kafka not the king" --messages "Pulsar rocks!" --messages "YES!"
+pulsar-client produce persistent://public/default/hello-topic --messages "Kafka not the king" --messages "Pulsar rocks!" --messages "YES!"
 ```
 
 ## Benchmark
 
 ```shell
-bin/pulsar-perf produce persistent://public/default/bench-topic --rate 10000
+pulsar-perf produce persistent://public/default/bench-topic --rate 1000
 ```
 
 ```shell
-bin/pulsar-perf consume persistent://public/default/bench-topic --subscriber-name bench-subscription
+pulsar-perf consume persistent://public/default/bench-topic --subscriber-name bench-subscription
 ```
 
 Use `non-persistent` topic and watch the latency drops :)
@@ -70,11 +75,11 @@ Use `non-persistent` topic and watch the latency drops :)
 Persistent
 
 ```shell
-bin/pulsar-admin persistent stats persistent://public/default/bench-topic
+pulsar-admin persistent stats persistent://public/default/bench-topic
 ```
 
 Non-persistent
 
 ```shell
-bin/pulsar-admin non-persistent stats non-persistent://public/default/bench-topic
+pulsar-admin non-persistent stats non-persistent://public/default/bench-topic
 ```

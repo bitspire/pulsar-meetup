@@ -64,14 +64,8 @@
             ];
 
             shellHook = ''
-              set +ex
-              if ! [ -f ".env" ]; then
-                echo "WARNING: No .env file, will copy .env.example"
-                cp .env.example .env
-              else
-                echo "Load .env"
-                set -o allexport; source .env; set +o allexport
-              fi
+              set +e
+              export PATH=$PATH:$HOME/apache-pulsar-2.10.2/bin
               echo "Welcome to nix shell"
 
             '';

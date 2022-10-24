@@ -1,6 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import pulsar
+
+# handle Ctrl+C
+import signal
+signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 client = pulsar.Client('pulsar://localhost:6650')
 consumer = client.subscribe('persistent://public/default/hello-topic', 'consumer-subscription')
