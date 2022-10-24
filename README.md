@@ -11,3 +11,18 @@ The repo has the following demos:
 3- **Sql** explore stored data in the topic using Pulsar SQL directly without a DB
 
 4- **Schema** Publish data using JSONSchema and demo DelayedDelivery
+
+## Get Started
+
+The fastest way to get all dependencies for the project is to enter a `nix-shell` which will install all required dependencies (except Pulsar).
+
+If you do not have it, you can easily [install nix](https://nixos.wiki/wiki/Nix_Installation_Guide) on Linux or Mac
+
+```shell
+nix develop
+
+# for older versions, run instead
+# nix-shell
+```
+
+Each folder has a README.md with instruction to run the demos in order
