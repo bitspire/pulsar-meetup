@@ -1,0 +1,65 @@
+{
+  "nodes": {
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "host": "gitlab.beyond.cc",
+        "lastModified": 1650374568,
+        "narHash": "sha256-Z+s0J8/r907g149rllvwhb4pKi8Wam5ij0st8PwAh+E=",
+        "owner": "opensource",
+        "repo": "flake-compat",
+        "rev": "b4a34015c698c7793d592d66adbab377907a2be8",
+        "type": "gitlab"
+      },
+      "original": {
+        "host": "gitlab.beyond.cc",
+        "owner": "opensource",
+        "repo": "flake-compat",
+        "type": "gitlab"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "host": "gitlab.beyond.cc",
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "owner": "opensource",
+        "repo": "flake-utils",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "type": "gitlab"
+      },
+      "original": {
+        "host": "gitlab.beyond.cc",
+        "owner": "opensource",
+        "repo": "flake-utils",
+        "type": "gitlab"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "host": "gitlab.beyond.cc",
+        "lastModified": 1665523140,
+        "narHash": "sha256-OgqooYIbw/zwYhpHy/5fhHIyK9TgQddzNli6WdtK9WA=",
+        "owner": "opensource",
+        "repo": "nixpkgs",
+        "rev": "bfb44da6a499f57181719c226ce8dc3bae70c299",
+        "type": "gitlab"
+      },
+      "original": {
+        "host": "gitlab.beyond.cc",
+        "owner": "opensource",
+        "repo": "nixpkgs",
+        "type": "gitlab"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

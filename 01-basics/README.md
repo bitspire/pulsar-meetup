@@ -1,6 +1,7 @@
 # Pulsar Getting Started
 
 ## Overview
+
 - [x] Install standalone Pulsar
 - [x] Hello World producer and consumer
 - [x] Benchmark
@@ -10,18 +11,22 @@
 ### Locally
 
 Install
+
 ```shell
-wget https://archive.apache.org/dist/pulsar/pulsar-2.4.2/apache-pulsar-2.4.2-bin.tar.gz
-tar xvf apache-pulsar-2.4.2-bin.tar.gz
-cd apache-pulsar-2.4.2
+PULSAR_VERSION=2.10.2
+wget https://archive.apache.org/dist/pulsar/pulsar-$PULSAR_VERSION/apache-pulsar-$PULSAR_VERSION-bin.tar.gz
+tar xvf apache-pulsar-$PULSAR_VERSION-bin.tar.gz
+cd apache-pulsar-$PULSAR_VERSION
 ```
 
 Run
+
 ```shell
 bin/pulsar standalone
 ```
 
 ### Docker
+
 ```shell
 docker run -it \
   --name pulsar \
@@ -63,11 +68,13 @@ Use `non-persistent` topic and watch the latency drops :)
 ### See topic stats
 
 Persistent
+
 ```shell
 bin/pulsar-admin persistent stats persistent://public/default/bench-topic
 ```
 
 Non-persistent
+
 ```shell
 bin/pulsar-admin non-persistent stats non-persistent://public/default/bench-topic
 ```

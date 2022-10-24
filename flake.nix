@@ -33,7 +33,7 @@
               jre = p.jdk17;
             };
             gradle = p.gradle.override {
-              jre = p.jdk17;
+              java = p.jdk17;
             };
             yarn = p.yarn.override {
               nodejs = p.nodejs-16_x;
@@ -53,6 +53,7 @@
               gradle
 
               python3
+              python310Packages.pip
 
               curl
               git
