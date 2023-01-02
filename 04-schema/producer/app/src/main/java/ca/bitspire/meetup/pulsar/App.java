@@ -6,6 +6,8 @@ package ca.bitspire.meetup.pulsar;
 import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.PulsarClientException;
+import org.apache.pulsar.client.api.Schema;
+import org.apache.pulsar.client.api.TableView;
 import org.apache.pulsar.client.impl.schema.JSONSchema;
 import org.apache.pulsar.client.api.MessageId;
 
@@ -20,27 +22,41 @@ public class App {
 
         try (PulsarClient client = PulsarClient.builder().serviceUrl(url).build()) {
 
-            try (Producer<ChatMessage> producer = client.newProducer(JSONSchema.of(ChatMessage.class)).topic(topic).create()) {
+            try (Producer<ChatMessage> producer = client.newProducer(JSONSchema.of(ChatMessage.class)).topic(topic)
+                    .create()) {
 
                 // Send a message with DelayedDelivery
-                // To cancel delivery, store the messageId then at any moment before delivery use a consumer to ack the message `consumer.acknowledge(messageId)`
-                MessageId messageId = producer.newMessage().deliverAfter(10L, TimeUnit.SECONDS).value(new ChatMessage("system", "This message scheduled with a DelayedDelivery")).send();
+                // To cancel delivery, store the messageId then at any moment before delivery
+                // use a consumer to ack the message `consumer.acknowledge(messageId)`
+                MessageId messageId = producer.newMessage().deliverAfter(10L, TimeUnit.SECONDS)
+                        .value(new ChatMessage("system", "This message scheduled with a DelayedDelivery")).send();
                 System.out.println(String.format("messageId for DelayedDelivery: %s", messageId));
-
 
                 // Send 10 messages
                 for (int i = 1; i <= 10; i++) {
                     String user = String.format("User-%02d", i);
-                    producer.send(new ChatMessage(user, "Pulsar Rocks!"));
+                    producer.newMessage().key(user).value(new ChatMessage(user, "Pulsar Rocks!")).send();
                 }
+
+                // Example for TableView reader, configure topic with auto compact
+                TableView<ChatMessage> table = client.newTableViewBuilder(JSONSchema.of(ChatMessage.class)).topic(topic)
+                        .create();
+                table.forEachAndListen((key, message) -> {
+                    System.out.println(String.format("key: %s, message: %s", key, message));
+                });
+
+                // It acts similar to Hashtable, but will always be up to date based on new messages in the topic
+                System.out.println(String.format("message for User-03: %s",table.get("User-03")));
 
             } catch (PulsarClientException e) {
                 System.err.println("Cannot create producer");
                 e.printStackTrace();
             }
+
         } catch (PulsarClientException e) {
             System.err.println("Cannot connect to Pulsar cluster");
             e.printStackTrace();
         }
+
     }
 }

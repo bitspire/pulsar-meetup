@@ -22,6 +22,10 @@
       host = "gitlab.beyond.cc";
       flake = false;
     };
+    pulsar = {
+      url = "https://dlcdn.apache.org/pulsar/pulsar-2.10.2/apache-pulsar-2.10.2-bin.tar.gz";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }:    
@@ -65,7 +69,7 @@
 
             shellHook = ''
               set +e
-              export PATH=$PATH:$HOME/apache-pulsar-2.10.2/bin
+              # export PATH=$PATH:$HOME/apache-pulsar-2.10.2/bin
               echo "Welcome to nix shell"
 
             '';
