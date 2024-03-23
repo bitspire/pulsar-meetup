@@ -13,7 +13,7 @@
 Install
 
 ```shell
-PULSAR_VERSION=2.10.2
+PULSAR_VERSION=3.0.3
 wget https://archive.apache.org/dist/pulsar/pulsar-$PULSAR_VERSION/apache-pulsar-$PULSAR_VERSION-bin.tar.gz
 tar xvf apache-pulsar-$PULSAR_VERSION-bin.tar.gz
 cd apache-pulsar-$PULSAR_VERSION
@@ -38,7 +38,7 @@ docker run -it \
   -p 6650:6650 \
   -p 8080:8080 \
   -v $PWD/data:/pulsar/data \
-  apachepulsar/pulsar:2.10.2 \
+  apachepulsar/pulsar-all:3.0.3 \
   bin/pulsar standalone
 ```
 

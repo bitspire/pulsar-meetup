@@ -6,7 +6,6 @@ package ca.bitspire.meetup.pulsar;
 import org.apache.pulsar.client.api.Producer;
 import org.apache.pulsar.client.api.PulsarClient;
 import org.apache.pulsar.client.api.PulsarClientException;
-import org.apache.pulsar.client.api.Schema;
 import org.apache.pulsar.client.api.TableView;
 import org.apache.pulsar.client.impl.schema.JSONSchema;
 import org.apache.pulsar.client.api.MessageId;
@@ -39,7 +38,7 @@ public class App {
                 }
 
                 // Example for TableView reader, configure topic with auto compact
-                TableView<ChatMessage> table = client.newTableViewBuilder(JSONSchema.of(ChatMessage.class)).topic(topic)
+                TableView<ChatMessage> table = client.newTableView(JSONSchema.of(ChatMessage.class)).topic(topic)
                         .create();
                 table.forEachAndListen((key, message) -> {
                     System.out.println(String.format("key: %s, message: %s", key, message));

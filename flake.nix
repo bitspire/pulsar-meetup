@@ -4,28 +4,22 @@
 
   inputs = {
     nixpkgs = {
-      type = "gitlab";
-      owner = "opensource";
-      repo = "nixpkgs";
-      host = "gitlab.beyond.cc";
+      type = "tarball";
+      url = "https://git.beyond.cc/public/nixpkgs/archive/master.tar.gz";
     };
     flake-utils = {
-      type = "gitlab";
-      owner = "opensource";
-      repo = "flake-utils";
-      host = "gitlab.beyond.cc";
+      type = "git";
+      url = "https://git.beyond.cc/public/flake-utils.git";
     };
     flake-compat = {
-      type = "gitlab";
-      owner = "opensource";
-      repo = "flake-compat";
-      host = "gitlab.beyond.cc";
+      type = "git";
+      url = "https://git.beyond.cc/public/flake-compat.git";
       flake = false;
     };
-    pulsar = {
-      url = "https://dlcdn.apache.org/pulsar/pulsar-2.10.2/apache-pulsar-2.10.2-bin.tar.gz";
-      flake = false;
-    };
+    # pulsar = {
+    #   url = "https://archive.apache.org/dist/pulsar/pulsar-3.0.3/apache-pulsar-3.0.3-bin.tar.gz";
+    #   flake = false;
+    # };
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }:    
@@ -65,11 +59,13 @@
               jq
               ripgrep
               vim
+
             ];
 
             shellHook = ''
               set +e
-              # export PATH=$PATH:$HOME/apache-pulsar-2.10.2/bin
+              # export PATH=$PATH:$PULSAR_HOME/bin
+              export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib/"
               echo "Welcome to nix shell"
 
             '';
